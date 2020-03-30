@@ -16,4 +16,4 @@ env:
 
 script:
 
-    - platformio ci --board=uno 
+    - platformio ci --board=uno --lib=./
