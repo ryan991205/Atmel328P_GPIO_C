@@ -6,11 +6,14 @@ cache:
 
 install:
 - pip install -U platformio
+- platformio update
 
 env:
 - BOARD=uno
+    - PLATFORMIO_CI_SRC=GPIO.h
+    - PLATFORMIO_CI_SRC=GPIO.c
+    - PLATFORMIO_CI_SRC=example/main.ino
 
 script:
-- for e in example/*; do
-    platformio ci --board=$BOARD --lib=. $e/*;
-  done
+
+    - platformio ci --board=uno 
