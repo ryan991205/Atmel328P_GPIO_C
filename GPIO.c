@@ -68,7 +68,7 @@ void GPIO_InitPort(uint8_t _port, uint8_t _portVal, uint8_t _directionVal, uint8
 // @example reading pin 2 that is high would return 1. else it will return 0
 uint8_t	GPIO_PinRead(const GPIO *data)
 {
-	if(GPIO_R[data->PORT].PIN & (1UL << data->PIN) == 0) return LOW;
+	if((GPIO_R[data->PORT].PIN & (1UL << data->PIN)) == 0) return LOW;
 	else return HIGH;
 }
 
