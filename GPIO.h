@@ -6,9 +6,8 @@
 	Can control all IO using standard read/write function.
 
 	AUTHOR		: Ryan Vrosch
-	DATE		: 03-03-2020
-	DATE HMV	: 30-03-2020
-	VER			: V1.0.0
+	DATE		: 01-04-2020
+	VER			: V1.0.1
 */
 
 #ifdef Arduino_h

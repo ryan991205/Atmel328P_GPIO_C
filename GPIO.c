@@ -68,8 +68,14 @@ void GPIO_InitPort(uint8_t _port, uint8_t _portVal, uint8_t _directionVal, uint8
 // @example reading pin 2 that is high would return 1. else it will return 0
 uint8_t	GPIO_PinRead(const GPIO *data)
 {
-	if((GPIO_R[data->PORT].PIN & (1UL << data->PIN)) == 0) return LOW;
-	else return HIGH;
+	if((GPIO_R[data->PORT].PIN & (1UL << data->PIN)) == 0)
+	{
+		return LOW;
+	}
+	else 
+	{
+		return HIGH;
+	}
 }
 
 // @brief	Sets output of GPIO 'pin' to level (0/LOW or >1/HIGH ).
@@ -119,7 +125,7 @@ uint8_t GPIO_getArduinoPin(const GPIO* data)
 // @brief Initialise the interupt with a defined triggertype for int 0 or 1 specified by *data.
 void GPIO_InitInterrupt(GPIO *data, uint8_t _triggerType)
 {
-	if (data->PIN == 2)			{ PIN_INTERRUPTS1_R->EXTERNAL_INT_A |= _triggerType << 0; }
+	if (data->PIN == 2)			{ PIN_INTERRUPTS1_R->EXTERNAL_INT_A |= (_triggerType << 0); }
 	else if (data->PIN == 3)	{ PIN_INTERRUPTS1_R->EXTERNAL_INT_A |= (_triggerType << 2); }
 }
 

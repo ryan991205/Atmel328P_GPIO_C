@@ -6,6 +6,7 @@
 
 // blink example
 
+
 GPIO LED1	= { .DIR = OUTPUT,	.PORT = PORT_B, .PIN =  5}; // pin 13  on arduino (LED)
 GPIO LED2;
 
