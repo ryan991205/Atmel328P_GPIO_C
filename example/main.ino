@@ -1,6 +1,8 @@
+
 #include <Arduino.h>
 #include "GPIO.h"
 
+#define Arduino_h 
 
 // blink example
 

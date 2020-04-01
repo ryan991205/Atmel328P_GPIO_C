@@ -8,18 +8,30 @@
 	AUTHOR		: Ryan Vrosch
 	DATE		: 03-03-2020
 	DATE HMV	: 30-03-2020
-	VER			: V1.0.1_HMV
+	VER			: V1.0.0
 */
 
-// WARNING V1.0.1_HMV LINKER/INCLUDE ERROR
-// 
-// when importing the #include <GPIO> is not linked to the project
-// you can do this by selecting the project, Press F4 and edit:
-//	extra flags:
-//  -I"c:\mypath\includes\GPIO" -I"c:\mypath\includes\GPIO"  
-// edit this to the path of the GPIO project file
+#ifdef Arduino_h
+	#include <Arduino.h>
+#endif
 
-#include <Arduino.h>
+#ifndef Arduino_h
+	#include <inttypes.h>
+
+	// Logic levels
+	#define	LOW					0x00
+	#define HIGH				0x01
+
+	// Port Directions
+	#define INPUT				0x00
+	#define OUTPUT				0x01
+	#define INPUT_PULLUP		0x02
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct {		/* GPIO Structure */
 	uint8_t DIR;		// 
@@ -28,40 +40,20 @@ typedef struct {		/* GPIO Structure */
 } GPIO;
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+// Ports 
+#define PORT_B				0x00	// Port B is an 8-bit bi-directional I/O port with internal pull-up resistors.		Port B has better driving capabilities than the other ports. */
+#define PORT_C				0x01	// Port C is an 8-bit bi-directional I/O port with internal pull-up resistors.		Only bits 6 and 7 are present on the product pinout.
+#define PORT_D				0x02	// Port D is an 8-bit bi-directional I/O port with internal pull-up resistors.
 
 // GPIO EXTERNAL_INT_MASK_R
 #define GPIO_INT1_REQ_ENABLE_M	(1UL << 1)
 #define GPIO_INT0_REQ_ENABLE_M	(1UL << 0)
 
-
-
-#ifndef ARDUINO
-
-// Logic levels
-#define	LOW					0
-#define HIGH				1
-
-// Port Directions
-#define INPUT				0
-#define OUTPUT				1
-#define INPUT_PULLUP		2
-#endif
-
-
-
-// Ports 
-#define PORT_B				0		// Port B is an 8-bit bi-directional I/O port with internal pull-up resistors.		Port B has better driving capabilities than the other ports. */
-#define PORT_C				1		// Port C is an 8-bit bi-directional I/O port with internal pull-up resistors.		Only bits 6 and 7 are present on the product pinout.
-#define PORT_D				2		// Port D is an 8-bit bi-directional I/O port with internal pull-up resistors.
-
 // Interrupt types on INT0 and INT1
-#define LOWLEVEL			0
-#define ANY_CHANGE			1
-#define FALLING_EDGE		2
-#define RISING_EDGE			3
+#define LOWLEVEL			0x00
+#define ANY_CHANGE			0x01
+#define FALLING_EDGE		0x02
+#define RISING_EDGE			0x03
 
 // Initialisation GPIO
 void	GPIO_InitPin(GPIO *data, uint8_t _dataDirection, uint8_t _port, uint8_t _pin);

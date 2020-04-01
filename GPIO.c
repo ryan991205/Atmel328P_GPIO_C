@@ -64,11 +64,12 @@ void GPIO_InitPort(uint8_t _port, uint8_t _portVal, uint8_t _directionVal, uint8
 	GPIO_R[_port].PIN = _pinVal;
 }
 
-// @brief Reads the output of a gpio pin and returns a maskset of the GPIO register.
-// @example reading pin 2 that is high would return (00000100) ! note that that would read as 4.
+// @brief Reads the output of a gpio pin and returns 0 (LOW) or 1 (HIGH).
+// @example reading pin 2 that is high would return 1. else it will return 0
 uint8_t	GPIO_PinRead(const GPIO *data)
 {
-	return GPIO_R[data->PORT].PIN & (1UL << data->PIN);
+	if(GPIO_R[data->PORT].PIN & (1UL << data->PIN) == 0) return LOW;
+	else return HIGH;
 }
 
 // @brief	Sets output of GPIO 'pin' to level (0/LOW or >1/HIGH ).
