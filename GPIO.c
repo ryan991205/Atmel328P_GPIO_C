@@ -2,6 +2,8 @@
 #include "GPIO.h"
 #include "GPIO_Structs.h"
 
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -79,7 +81,7 @@ uint8_t	GPIO_PinRead(const GPIO *data)
 }
 
 // @brief	Sets output of GPIO 'pin' to level (0/LOW or >1/HIGH ).
-void GPIO_PinWrite(GPIO *data, uint8_t level)
+void GPIO_PinWrite(const GPIO *data, uint8_t level)
 {
 	if (level == LOW)
 	{
@@ -89,6 +91,12 @@ void GPIO_PinWrite(GPIO *data, uint8_t level)
 	{
 		GPIO_R[data->PORT].PORT |= (1UL << data->PIN);
 	}	
+}
+
+// @brief	Toggle of GPIO 'pin' LOW -> (HIGH or HIGH -> LOW)
+void GPIO_PinToggle(const GPIO *data)
+{
+	GPIO_R[data->PORT].PORT ^= (1UL << data->PIN);
 }
 
 // @brief Reads the output of all the pins on specified port.
@@ -119,7 +127,7 @@ uint8_t GPIO_getArduinoPin(const GPIO* data)
 	{
 		return (8 + data->PIN);
 	}
-	return 255;
+	return 255; // error
 }
 
 // @brief Initialise the interupt with a defined triggertype for int 0 or 1 specified by *data.
